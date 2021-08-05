@@ -57,7 +57,7 @@ int main()
         }
         else
         {
-            if (decimalPart - indicator*0.10 < 0) decimalPart = indicator*0.10 - 0.10;
+            if (decimalPart - indicator*0.10 <= 0) decimalPart = indicator*0.10 - 0.10;
             else decimalPart = indicator*0.10 + 0.10;
         }
         
