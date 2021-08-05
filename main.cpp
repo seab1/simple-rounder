@@ -5,65 +5,37 @@ using namespace std;
 
 int main()
 {
-    int number;
-    double manipulator, decimalPart;
+    double number, mirror;
     
     cout << "Podaj liczbe:" << endl;
     cin >> number;
+    mirror = number;
     
     if (number < 100)
     {
-        manipulator = (double) number/10;
-        number = (int) manipulator;
-        decimalPart = manipulator - number;
+        number = trunc(mirror/10);
         
-        if (decimalPart < 0.25) decimalPart = 0;
-        else if (decimalPart >= 0.25 && decimalPart < 0.75) decimalPart = 0.5;
-        else if (decimalPart >= 0.75) decimalPart = 1.0;
-        
-        manipulator = 10*number + 10*decimalPart;
-        cout << manipulator << endl;
+        while(mirror != 10*number && mirror != 10*(number + 0.5)) mirror--;
     }
     
     if (number >= 100 && number < 200)
     {
-        double indicator;
+        number = trunc(mirror/10);
         
-        manipulator = (double) number/100;
-        number = (int) manipulator;
-        decimalPart = manipulator - number;
-        indicator = trunc(decimalPart*10);
-        
-        if (decimalPart - indicator*0.10 < 0.049) decimalPart = indicator*0.10;
-        else decimalPart = indicator*0.10 + 0.10;
-        
-        manipulator = 100*number + 100*decimalPart;
-        cout << manipulator << endl;
+        while(mirror > 10*number) mirror--;
     }
     
     if (number >= 200)
     {
-        double indicator;
+        double i = 5;
+        double interval = 0.20;
+        number = trunc(mirror/100);
         
-        manipulator = (double) number/100;
-        number = (int) manipulator;
-        decimalPart = manipulator - number;
-        indicator = trunc(decimalPart*10);
-        
-        if ((int) indicator % 2 == 0)
-        {
-           if (decimalPart - indicator*0.10 < 0.099) decimalPart = indicator*0.10;
-           else decimalPart = indicator*0.10 + 0.20; 
-        }
-        else
-        {
-            if (decimalPart - indicator*0.10 <= 0) decimalPart = indicator*0.10 - 0.10;
-            else decimalPart = indicator*0.10 + 0.10;
-        }
-        
-        manipulator = 100*number + 100*decimalPart;
-        cout << manipulator << endl;
+        while(mirror < 100*(number + i*interval)) i--;
+        while(mirror > 100*(number + i*interval)) mirror--;
     }
+    
+    cout << mirror;
 
     return 0;
 }
